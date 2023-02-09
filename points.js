@@ -79,4 +79,4 @@ let points = [
           
         };
 
-
+export {GenerateMarkers};
