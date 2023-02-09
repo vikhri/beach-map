@@ -1,0 +1,11 @@
+html, body, main {
+
+    height: 100vh;
+
+}
+
+.shops {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+}
