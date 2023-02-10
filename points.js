@@ -4,25 +4,25 @@ let points = [
         position: { lat: 9.56198785015178, lng: 100.02605438232423 },
         title: 'bophutBeach',
         description: '<p>bophutBeach</p>',
-        waves: 1,
+        waves: false,
     },
     {  
         position: { lat: 9.57282136669429, lng: 99.99532699584962 },
         title: 'maenamBeach',
         description: '<p>maenamBeach</p>',
-        waves: 2,
+        waves: true,
     },
     {   
         position: { lat: 9.568081745691513, lng: 99.91790771484376 },
         title: 'laemBeach',
         description: '<p>laemBeach</p>',
-        waves: 0,
+        waves: false,
     },
     {  
         position: { lat: 9.52118979624974, lng: 100.05884170532228 },
         title: 'chawengBeach',
         description: '<p>chawengBeach</p>',
-        waves: 4,
+        waves: true,
     },
 
 ];
@@ -79,4 +79,4 @@ let points = [
           
         };
 
-export {GenerateMarkers};
+export {points, GenerateMarkers};
