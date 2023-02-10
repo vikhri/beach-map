@@ -1,6 +1,7 @@
 // import {GenerateMarkers} from './points.js';
 
 let wavesCheckbox = document.getElementById('waves');
+let sunsetCheckbox = document.getElementById('sunset');
 
 let map;
 
@@ -21,7 +22,7 @@ function initMap() {
  
     map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 9.50139445, lng: 99.99561927320003 },
-    zoom: 12,
+    zoom: 11,
   });
 
 
@@ -44,6 +45,7 @@ let points = [
         title: 'bophutBeach',
         description: '<p>bophutBeach</p>',
         waves: true,
+        sunset: false,
     },
     {  
         id:2,
@@ -51,6 +53,7 @@ let points = [
         title: 'maenamBeach',
         description: '<p>maenamBeach</p>',
         waves: true,
+        sunset: false,
     },
     {   
         id:3,
@@ -58,6 +61,7 @@ let points = [
         title: 'laemBeach',
         description: '<p>laemBeach</p>',
         waves: false,
+        sunset: true,
     },
     {  
         id:4,
@@ -65,13 +69,15 @@ let points = [
         title: 'chawengBeach',
         description: '<p>chawengBeach</p>',
         waves: true,
+        sunset: false,
     },
     {   
       id: 5,
       position: { lat: 9.556448527658542,  lng: 99.9284319755981 },
       title: 'Nathonbeach',
-      description: '<p>Nathonbeach</p>',
+      description: '<p>Nathon beach</p>',
       waves: false,
+      sunset: true,
   },
   {  
       id:6,
@@ -79,6 +85,7 @@ let points = [
       title: 'LipaNoibeach',
       description: '<p>Lipa Noi beach</p>',
       waves: true,
+      sunset: true,
   },
   {   
       id:7,
@@ -86,6 +93,7 @@ let points = [
       title: 'Lamaibeach',
       description: '<p>Lamai beach</p>',
       waves: true,
+      sunset: false,
   },
   {  
       id:8,
@@ -93,6 +101,7 @@ let points = [
       title: 'PangKhabeach',
       description: '<p>Pang Kha beach</p>',
       waves: false,
+      sunset: true,
   },
 
 ];
@@ -104,7 +113,7 @@ let beachMarkerMap = {};
         let GenerateMarkers = () => {
             
         points.forEach((point) => {
-            console.log(point);
+            
             const marker = new google.maps.Marker({
               position: point.position,
               title: point.title,
@@ -132,7 +141,7 @@ let beachMarkerMap = {};
 
 GenerateMarkers();
 
-console.log(beachMarkerMap);
+
 
 let showMarker = (id) => {
     beachMarkerMap[id].setMap(map);
@@ -143,34 +152,84 @@ let hideMarker = (id) => {
 };
  
 
-let applyFilter = () => {
 
+// applyFilter();
 
+// wavesCheckbox.addEventListener('change', function() {
+//   if (this.checked) {
+//     applyFilter();
+//   } else {
+//     GenerateMarkers().setMap(map);
+//   }
+// });
 
-    points.forEach((point) => {
+// Создаю объект фильтра и записываю туда состояния фильтра
 
-        if (point.waves) {
-            showMarker(point.id);
-        } else {
-            hideMarker(point.id);
-        };
-
-    });
-};
+let filter = {
+  waves: false,
+  sunset: false,
+}
 
 
 wavesCheckbox.addEventListener('change', function() {
-  if (this.checked) {
-    applyFilter();
-  } else {
-    GenerateMarkers().setMap(map);
-  }
+  filter.waves = this.checked;
+  applyFilter();
+ });
+
+sunsetCheckbox.addEventListener('change', function() {
+  filter.sunset = this.checked;
+  applyFilter();
 });
 
+
+let applyFilter = function() {
+
+// Создаю объект где описано какие маркеры должны быть показаны.
+
+
+let pointsDisplay = {};
+
+
+  points.forEach((point) => {
+     pointsDisplay[point.id] = true; 
+     
+    if (filter.waves) {
+    
+    points.forEach((point) => 
+    { if (point.waves !== true) {pointsDisplay[point.id] = false; }
+    })
+  };
+
+    if (filter.sunset) {
+    points.forEach((point) => 
+    { if (point.sunset !== true) {pointsDisplay[point.id] = false; }
+    })
+  };
+  
+
+    
+  });
+
+  
+  // Показываю маркеры
+
+  points.forEach((point) => {
+  if (pointsDisplay[point.id]) {
+    showMarker(point.id)
+    } else {
+      hideMarker(point.id);
+    };
+  
+}); 
+
+};
+  
 
 };
 
 
 
 window.initMap = initMap;
+
+
 
