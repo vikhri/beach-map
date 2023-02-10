@@ -5,19 +5,7 @@ let sunsetCheckbox = document.getElementById('sunset');
 
 let map;
 
-
-const bophutBeach = { lat: 9.56198785015178, lng: 100.02605438232423 };
-const maenamBeach = { lat: 9.57282136669429, lng: 99.99532699584962 };
-const laemBeach = { lat: 9.568081745691513, lng: 99.91790771484376 };
-const chawengBeach = { lat: 9.52118979624974, lng: 100.05884170532228 };
-
-const beachInfo =
-  '<div id="content">' +
-  '<h1 id="firstHeading" class="firstHeading">Beach</h1>' +
-  '<p>Description</p>' +
-  '</div>';
-
-
+// Создаем  карту
 function initMap() {
 
   map = new google.maps.Map(document.getElementById('map'), {
@@ -28,15 +16,10 @@ function initMap() {
 
   const image = {
     url: "/sun-umbrella.png",
-    // This marker is 20 pixels wide by 32 pixels high.
     size: new google.maps.Size(24, 24),
-    // The origin for this image is (0, 0).
     origin: new google.maps.Point(0, 0),
-    // The anchor for this image is the base of the flagpole at (0, 32).
     anchor: new google.maps.Point(0, 24),
   };
-
-  //  GenerateMarkers();
 
   let points = [
     {
@@ -107,7 +90,7 @@ function initMap() {
   ];
 
 
-
+  // Создаем маркеры и 
   let beachMarkerMap = {};
 
   let GenerateMarkers = () => {
@@ -153,16 +136,6 @@ function initMap() {
 
 
 
-  // applyFilter();
-
-  // wavesCheckbox.addEventListener('change', function() {
-  //   if (this.checked) {
-  //     applyFilter();
-  //   } else {
-  //     GenerateMarkers().setMap(map);
-  //   }
-  // });
-
   // Создаю объект фильтра и записываю туда состояния фильтра
 
   let filter = {
@@ -173,22 +146,20 @@ function initMap() {
 
   wavesCheckbox.addEventListener('change', function () {
     filter.waves = this.checked;
-    applyFilter();
+    applyFilter(filter);
   });
 
   sunsetCheckbox.addEventListener('change', function () {
     filter.sunset = this.checked;
-    applyFilter();
+    applyFilter(filter);
   });
 
 
-  let applyFilter = function () {
+  let applyFilter = (filter) => {
 
-    // Создаю объект где описано какие маркеры должны быть показаны.
-
+    // Создаю объект, где описано какие маркеры должны быть показаны.
 
     let pointsDisplay = {};
-
 
     points.forEach((point) => {
       pointsDisplay[point.id] = true;
@@ -206,9 +177,6 @@ function initMap() {
         if (point.sunset !== true) { pointsDisplay[point.id] = false; }
       })
     };
-
-
-
 
     // Показываю маркеры
 
