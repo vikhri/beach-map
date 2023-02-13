@@ -4,6 +4,7 @@
 <head>
 	<title>Map with filters JS </title>
 	<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- <link rel="stylesheet" href='./node_modules/normalize.css/normalize.css'> -->
 	<link rel="stylesheet" href="/style.css">
 </head>
@@ -13,14 +14,14 @@
         <section class="beachesmap">
             <div class="beachesmap__filter">
                 <h1 class='beachesmap__title'>Карта</h1>
-                <p class='beachesmap__description'>Тут будут фильтры</p>
+                <p class='beachesmap__description'>Это карта пляжей острова Самуй.<br> Выбирайте фильтры и смотрите, какой пляж подойдет для заката, а какой для отдыха под шум прибоя</p>
                 <div class="beachesmap__field">
                     <input class="beachesmap__input" type="checkbox" id="waves" name="waves">
-                    <label for="waves">Волны</label>
+                    <label for="waves">Сильные волны</label>
                 </div>
                 <div class="beachesmap__field">
                     <input class="beachesmap__input" type="checkbox" id="sunset" name="sunset" >
-                    <label for="sunset">Закат</label>
+                    <label for="sunset">Красивые закаты</label>
                 </div>
             </div>
             <div class="beaches__map" id="map"></div>
